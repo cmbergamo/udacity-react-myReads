@@ -5,7 +5,7 @@ function Book( props ) {
 	return (
 		<div className="book">
 			<div className="book-top">
-				<div className="book-cover" style={{ width: 128, height: 174, backgroundImage: 'url("http://books.google.com/books/content?id=1q_xAwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE712CA0cBYP8VKbEcIVEuFJRdX1k30rjLM29Y-dw_qU1urEZ2cQ42La3Jkw6KmzMmXIoLTr50SWTpw6VOGq1leINsnTdLc_S5a5sn9Hao2t5YT7Ax1RqtQDiPNHIyXP46Rrw3aL8&source=gbs_api")' }}></div>
+				<div className="book-cover" style={{ width: 128, height: 174, backgroundImage:  `url(${ props.book.imageLinks.smallThumbnail })` }}></div>
 				<div className="book-shelf-changer">
 					<select>
 						<option value="none" disabled>Move to...</option>
@@ -16,8 +16,12 @@ function Book( props ) {
 					</select>
 				</div>
 			</div>
-			<div className="book-title">Oh, the Places You'll Go!</div>
-			<div className="book-authors">Seuss</div>
+			<div className="book-title"> { props.book.title }</div>
+			{ props.book.authors.map( (author, index) => 
+				(
+					<div key={ index } className="book-authors">{ author } </div>
+				)
+			)}
 		</div>
 	)
 }
