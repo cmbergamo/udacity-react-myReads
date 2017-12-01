@@ -10,9 +10,10 @@ function ListBooks( props ) {
 				{ props.books ?
 					(
 						<ol className="books-grid">
-							{ props.books.map( ( book, index ) => (
+							{ props.books.map( ( book, index ) =>
+								(
 									<li key={ index } >
-										<Book book={ book } />
+										<Book book={ book } updateBooks={ props.updateBooks } />
 									</li>
 								)
 							)}
