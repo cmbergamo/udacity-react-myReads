@@ -14,11 +14,11 @@ class Search extends Component {
 
 		this.setState( { query: value } );
 		
-		this.updateBooks( value );
+		this.updateSearch( value );
 
 	}
 
-	updateBooks = value => {
+	updateSearch = ( value ) => {
 		if (value) {
 			BooksAPI.search( value ).then( books => {
 				this.setState( { books } );
@@ -39,7 +39,7 @@ class Search extends Component {
 				</div>
 				<div className="search-books-results">
 					{ this.state.books.length > 0 && (
-						<ListBooks title='Result' books={ this.state.books }/>
+						<ListBooks title='Result' books={ this.state.books } updateBooks={ this.props.updateBooks } />
 					)}
 				</div> 
 			</div>

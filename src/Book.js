@@ -3,14 +3,6 @@ import { Link } from 'react-router-dom'
 
 class Book extends Component {
 
-	changeShelf(valeu, id) {
-		
-	}
-
-	updateBooks(books) {
-		this.props.updateBooks(books);
-	}
-
 	render () {
 		const {shelf = false, id, imageLinks, authors, title} = this.props.book;
 

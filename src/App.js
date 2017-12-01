@@ -18,27 +18,35 @@ class BooksApp extends React.Component {
 		});
 	}
 
-	updateBooks(book, shelf) {
-		console.log(book);
+	updateBooks = (book, shelf) => {
+		console.log(book + ' - ' + shelf);
 
-		BooksAPI.update(book, shelf).then(books => this.setState( { books } ) );
+		BooksAPI.update(book, shelf).then(booksIDs =>
+			{
+				BooksAPI.getAll().then( books => this.setState( { books } ) );
+			}
+		);
 
-		//this.setState( {books} );
 	}
 
 	render() {
+		let currentlyReading	= [];
+		let wantToRead			= [];
+		let read				= [];
 
-		const currentlyReading = this.state.books.filter( book => {
-			return ( book.shelf === 'currentlyReading' )
-		});
+		if ( this.state.books ) {
+			currentlyReading = this.state.books.filter( book => {
+				return ( book.shelf === 'currentlyReading' )
+			});
 
-		const wantToRead = this.state.books.filter( book => {
-			return ( book.shelf === 'wantToRead' )
-		});
+			wantToRead = this.state.books.filter( book => {
+				return ( book.shelf === 'wantToRead' )
+			});
 
-		const read = this.state.books.filter( book => {
-			return ( book.shelf === 'read' )
-		});
+			read = this.state.books.filter( book => {
+				return ( book.shelf === 'read' )
+			});
+		}
 
 		return (
 			<div className="app">
@@ -59,7 +67,11 @@ class BooksApp extends React.Component {
 						</div>
 					</div>
 				)} /> 
-				<Route path='/search' component={ Search } />
+				<Route path='/search' render={ () =>
+						 (
+							<Search updateBooks={ this.updateBooks } />
+						)
+					} />
 			</div>
 		)
 	}
