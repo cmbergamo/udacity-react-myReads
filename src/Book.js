@@ -13,24 +13,12 @@ class Book extends Component {
 						<div className="book-cover" style={{ width: 128, height: 174, backgroundImage:  `url(${ imageLinks.smallThumbnail })` }}></div>
 					</Link>
 					<div className="book-shelf-changer">
-						<select onChange={ (event) => this.props.updateBooks(id, event.target.value) } >
+						<select onChange={ (event) => this.props.updateBooks({ id }, event.target.value) } >
 							<option value="none" disabled>Move to...</option>
-							{ shelf === 'currentlyReading' ?
-								(<option value="currentlyReading" disabled>Currently Reading</option>) :
-								(<option value="currentlyReading">Currently Reading</option>) 
-							}
-							{ shelf === 'wantToRead' ?
-								(<option value="wantToRead" disabled>Want to Read</option>) :
-								(<option value="wantToRead">Want to Read</option>) 
-							}
-							{ shelf === 'read' ?
-								(<option value="read" disabled>Read</option>) :
-								(<option value="read">Read</option>) 
-							}
-							{ !shelf  ?
-								(<option value="none" disabled>None</option>) :
-								(<option value="none">None</option>) 
-							}
+							<option value="currentlyReading" defaultValue={ shelf === 'currentlyReading' } >Currently Reading</option>
+							<option value="wantToRead" defaultValue={ shelf === 'wantToRead' } >Want to Read</option>
+							<option value="read" defaultValue={ shelf === 'read' } >Read</option>
+							<option value="none" defaultValue={ !shelf } >None</option>
 						</select>
 					</div>
 				</div>
