@@ -9,7 +9,7 @@ class Book extends Component {
 		return (
 			<div className="book">
 				<div className="book-top">
-					<Link to='/details'>
+					<Link to= {{ pathname: '/details', params: {book: this.props.book} }} >
 						<div className="book-cover" style={{ width: 128, height: 174, backgroundImage:  `url(${ imageLinks.smallThumbnail })` }}></div>
 					</Link>
 					<div className="book-shelf-changer">

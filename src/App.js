@@ -2,6 +2,7 @@ import React from 'react'
 import ListBooks from './ListBooks'
 import Search from './Search'
 import { Route, Link } from 'react-router-dom'
+import BookDetails from './BookDetails'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 
@@ -73,7 +74,9 @@ class BooksApp extends React.Component {
 						 (
 							<Search updateBooks={ this.updateBooks } />
 						)
-					} />
+				} />
+
+				<Route path='/details' render={ () => <BookDetails /> } />
 			</div>
 		)
 	}
