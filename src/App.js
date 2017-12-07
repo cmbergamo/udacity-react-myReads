@@ -76,7 +76,7 @@ class BooksApp extends React.Component {
 						)
 				} />
 
-				<Route path='/details' render={ () => <BookDetails /> } />
+				<Route path='/details' component={ BookDetails } />
 			</div>
 		)
 	}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class Book extends Component {
 
@@ -9,7 +10,7 @@ class Book extends Component {
 		return (
 			<div className="book">
 				<div className="book-top">
-					<Link to= {{ pathname: '/details', params: {book: this.props.book} }} >
+					<Link to={{ pathname: '/details', params: {book: this.props.book} }} >
 						<div className="book-cover" style={{ width: 128, height: 174, backgroundImage:  `url(${ imageLinks.smallThumbnail })` }}></div>
 					</Link>
 					<div className="book-shelf-changer">
@@ -31,6 +32,11 @@ class Book extends Component {
 			</div>
 		)
 	}
+}
+
+Book.propTypes = {
+	book: PropTypes.object.isRequired,
+	updateBooks: PropTypes.func.isRequired
 }
 
 export default Book;

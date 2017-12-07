@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ListBooks from './ListBooks';
+import PropTypes from 'prop-types';
 import * as BooksAPI from './BooksAPI'
 
 class Search extends Component {
@@ -45,6 +46,10 @@ class Search extends Component {
 			</div>
 		)
 	}
+}
+
+Search.propTypes = {
+	updateBooks: PropTypes.func.isRequired
 }
 
 export default Search;
