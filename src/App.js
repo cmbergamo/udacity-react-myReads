@@ -1,14 +1,20 @@
 import React from 'react'
+import { Route, Link } from 'react-router-dom'
+
+//Import Self Development Components
 import ListBooks from './ListBooks'
 import Search from './Search'
-import { Route, Link } from 'react-router-dom'
 import BookDetails from './BookDetails'
+
+//Import data manipulation API
 import * as BooksAPI from './BooksAPI'
+
+//Import CSS's
 import './App.css'
 
 
 class BooksApp extends React.Component {
-	//Download Postman
+	
 	state = {
 		books : []
 	}
@@ -60,9 +66,11 @@ class BooksApp extends React.Component {
 						</div>
 						<div className="list-books-content">
 							<div>
-								<ListBooks title='Currently Reading' books={ currentlyReading } updateBooks={ this.updateBooks } />
-								<ListBooks title='Want to Read' books={ wantToRead } updateBooks={ this.updateBooks } />
-								<ListBooks title='Read' books={ read } updateBooks={ this.updateBooks } />
+
+								<ListBooks title='Currently Reading' books={ currentlyReading } updateBooks={ this.updateBooks } id='currentlyReading' />
+							
+								<ListBooks title='Want to Read' books={ wantToRead } updateBooks={ this.updateBooks } id='wantToRead' />
+								<ListBooks title='Read' books={ read } updateBooks={ this.updateBooks } id='read' />
 							</div>
 						</div>
 						<div className="open-search">
@@ -71,9 +79,9 @@ class BooksApp extends React.Component {
 					</div>
 				)} /> 
 				<Route path='/search' render={ () =>
-						 (
-							<Search updateBooks={ this.updateBooks } />
-						)
+					(
+						<Search updateBooks={ this.updateBooks } selecteds={ this.state.books } />
+					)
 				} />
 
 				<Route path='/details' component={ BookDetails } />

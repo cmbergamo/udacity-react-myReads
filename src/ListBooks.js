@@ -1,31 +1,33 @@
-import React from 'react'
-import Book from './Book'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types';
+import Book from './Book'
 
-function ListBooks( props ) {
+class ListBooks extends Component {
 
-	return (
-		<div className="bookshelf">
-			<h2 className="bookshelf-title">{ props.title }</h2>
-			<div className="bookshelf-books">
-				{ props.books ?
-					(
-						<ol className="books-grid">
-							{ props.books.map( ( book, index ) =>
-								(
-									<li key={ index } >
-										<Book book={ book } updateBooks={ props.updateBooks } />
-									</li>
-								)
-							)}
-							
-						</ol>
-					) : ''
-				}
+	render() {
+		return (
+			<div className="bookshelf">
+				<h2 className="bookshelf-title">{ this.props.title }</h2>
+				<div className="bookshelf-books" >
+					{ this.props.books ?
+						(
+							<ol className="books-grid" >
+								{ this.props.books.map( ( book, index ) =>
+									(
+										<li key={ index } >
+											<Book book={ book } updateBooks={ this.props.updateBooks } />
+										</li>
+									)
+								)}
+							</ol>
+						) : ''
+					}
+				</div>
+					
 			</div>
-		</div>
 
-	);
+		);
+	}
 }
 
 ListBooks.propTypes = {

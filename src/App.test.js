@@ -1,6 +1,6 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'
+import React from 'react';
+import { shallow } from 'enzyme';
+import App from './App';
 
 /** 
  This course is not designed to teach Test Driven Development. 
@@ -8,9 +8,10 @@ import App from './App'
  is not required.
 **/
 
-it('renders without crashing', () => {
-	const div = document.createElement('div')
-	ReactDOM.render(<App />, div)
+describe('<App />', () => {
+	xit('shallow renders correctly', () => {
+		expect( shallow ( <App /> ) );
+	});
 })
 
 

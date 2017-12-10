@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 class Book extends Component {
 
 	render () {
-		const {shelf = false, id, imageLinks, authors, title} = this.props.book;
+		const {shelf = false, id, imageLinks = '', authors, title} = this.props.book;
 
 		return (
-			<div className="book">
+			<div className="book" >
 				<div className="book-top">
 					<Link to={{ pathname: '/details', params: {book: this.props.book} }} >
 						<div className="book-cover" style={{ width: 128, height: 174, backgroundImage:  `url(${ imageLinks.smallThumbnail })` }}></div>
@@ -16,10 +16,10 @@ class Book extends Component {
 					<div className="book-shelf-changer">
 						<select onChange={ (event) => this.props.updateBooks({ id }, event.target.value) } >
 							<option value="none" disabled>Move to...</option>
-							<option value="currentlyReading" defaultValue={ shelf === 'currentlyReading' } >Currently Reading</option>
-							<option value="wantToRead" defaultValue={ shelf === 'wantToRead' } >Want to Read</option>
-							<option value="read" defaultValue={ shelf === 'read' } >Read</option>
-							<option value="none" defaultValue={ !shelf } >None</option>
+							<option value="currentlyReading" selected={ shelf === 'currentlyReading' } >Currently Reading</option>
+							<option value="wantToRead" selected={ shelf === 'wantToRead' } >Want to Read</option>
+							<option value="read" selected={ shelf === 'read' } >Read</option>
+							<option value="none" selected={ !shelf } >None</option>
 						</select>
 					</div>
 				</div>
@@ -36,7 +36,7 @@ class Book extends Component {
 
 Book.propTypes = {
 	book: PropTypes.object.isRequired,
-	updateBooks: PropTypes.func.isRequired
+	updateBooks: PropTypes.func.isRequired,
 }
 
 export default Book;
