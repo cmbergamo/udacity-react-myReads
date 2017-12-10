@@ -22,7 +22,6 @@ class Search extends Component {
 	updateSearch = ( value ) => {
 		if (value) {
 			BooksAPI.search( value ).then( books => {
-				console.log( books, this.props.selecteds );
 
 				for ( const book of books ) {
 
