@@ -5,13 +5,15 @@ import PropTypes from 'prop-types';
 import * as BooksAPI from './BooksAPI'
 
 class Search extends Component {
+	
 	state = {
 		query: '',
 		books: []
 	}
 	
-	changeQuery = ( event ) => {
-		const value = event.target.value;
+	changeQuery = ( event ={} ) => {
+		const target = event.target | {} ;
+		const value = JSON.parse(event.target.value);
 
 		this.setState( { query: value } );
 		
