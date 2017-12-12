@@ -4,7 +4,6 @@ import ListBooks from './ListBooks';
 import PropTypes from 'prop-types';
 import * as BooksAPI from './BooksAPI';
 import escapeRegExp from 'escape-string-regexp';
-import sortBy from 'sort-by';
 
 class Search extends Component {
 	
