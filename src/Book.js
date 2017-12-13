@@ -1,37 +1,34 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-class Book extends Component {
+function Book( props ) {
+	const {shelf = false, id, imageLinks = '', authors, title} = props.book;
 
-	render () {
-		const {shelf = false, id, imageLinks = '', authors, title} = this.props.book;
-
-		return (
-			<div className="book" >
-				<div className="book-top">
-					<Link to={{ pathname: '/details', params: {book: this.props.book} }} >
-						<div className="book-cover" style={{ width: 128, height: 174, backgroundImage:  `url(${ imageLinks.smallThumbnail })` }}></div>
-					</Link>
-					<div className="book-shelf-changer">
-						<select onChange={ (event) => this.props.updateBooks({ id }, event.target.value) } >
-							<option value="none" disabled>Move to...</option>
-							<option value="currentlyReading" selected={ shelf === 'currentlyReading' } >Currently Reading</option>
-							<option value="wantToRead" selected={ shelf === 'wantToRead' } >Want to Read</option>
-							<option value="read" selected={ shelf === 'read' } >Read</option>
-							<option value="none" selected={ !shelf } >None</option>
-						</select>
-					</div>
+	return (
+		<div className="book" >
+			<div className="book-top">
+				<Link to={{ pathname: '/details', params: {book: props.book} }} >
+					<div className="book-cover" style={{ width: 128, height: 174, backgroundImage:  `url(${ imageLinks.smallThumbnail })` }}></div>
+				</Link>
+				<div className="book-shelf-changer">
+					<select onChange={ (event) => props.updateBooks({ id }, event.target.value) } >
+						<option value="none" disabled>Move to...</option>
+						<option value="currentlyReading" selected={ shelf === 'currentlyReading' } >Currently Reading</option>
+						<option value="wantToRead" selected={ shelf === 'wantToRead' } >Want to Read</option>
+						<option value="read" selected={ shelf === 'read' } >Read</option>
+						<option value="none" selected={ !shelf } >None</option>
+					</select>
 				</div>
-				<div className="book-title"> { title }</div>
-				{ authors && authors.map( (author, index) => 
-					(
-						<div key={ index } className="book-authors">{ author } </div>
-					)
-				)}
 			</div>
-		)
-	}
+			<div className="book-title"> { title }</div>
+			{ authors && authors.map( (author, index) => 
+				(
+					<div key={ index } className="book-authors">{ author } </div>
+				)
+			)}
+		</div>
+	)
 }
 
 Book.propTypes = {

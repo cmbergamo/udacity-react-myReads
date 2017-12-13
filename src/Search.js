@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import ListBooks from './ListBooks';
 import PropTypes from 'prop-types';
 import * as BooksAPI from './BooksAPI';
 import escapeRegExp from 'escape-string-regexp';
+import { Debounce } from 'react-throttle';
+import ListBooks from './ListBooks';
 
 class Search extends Component {
 	
@@ -13,8 +14,8 @@ class Search extends Component {
 	}
 	
 	changeQuery = ( event ={} ) => {
-		const target = event.target | {} ;
-		const value = escapeRegExp( event.target.value );
+		const target = event.target || {} ;
+		const value = escapeRegExp( target.value || '' );
 
 		this.setState( { query: value } );
 		
@@ -26,16 +27,29 @@ class Search extends Component {
 		if (value) {
 			BooksAPI.search( value ).then( books => {
 
-				if ( books ) {
+				if ( books && !books.error ) {
+
 					const resolvedBook = books.map( book => {
 
-						for ( const selectedBook of this.props.selecteds ) {
-							if (book.id === selectedBook.id) {
-								book.shelf = selectedBook.shelf;
+						this.props.selecteds.find( element => {
+							if ( book.id === element.id ) {
+								book.shelf = element.shelf;
 
-								break;
+								return true;
 							}
-						}
+
+							return false;
+						});
+
+						;
+
+						// for ( const selectedBook of this.props.selecteds ) {
+						// 	if (book.id === selectedBook.id) {
+						// 		book.shelf = selectedBook.shelf;
+
+						// 		break;
+						// 	}
+						// }
 						
 						return book;
 					});
@@ -56,7 +70,9 @@ class Search extends Component {
 				<div className="search-books-bar">
 					<Link className='close-search' to='/' >Close</Link>
 					<div className="search-books-input-wrapper">
-						<input type="text" placeholder="Search by title or author" onChange={ this.changeQuery } />
+						<Debounce time="300" handler="onChange">
+							<input type="text" placeholder="Search by title or author" onChange={ this.changeQuery } />
+						</Debounce>
 					</div>
 				</div>
 				<div className="search-books-results">
