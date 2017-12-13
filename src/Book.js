@@ -12,7 +12,7 @@ function Book( props ) {
 					<div className="book-cover" style={{ width: 128, height: 174, backgroundImage:  `url(${ imageLinks.smallThumbnail })` }}></div>
 				</Link>
 				<div className="book-shelf-changer">
-					<select onChange={ (event) => props.updateBooks({ id }, event.target.value) } defaultValue={ shelf ? shelf : 'none' } >
+					<select onChange={ (event) => props.updateBooks( props.book, event.target.value) } defaultValue={ shelf ? shelf : 'none' } >
 						<option value="" disabled>Move to...</option>
 						<option value="currentlyReading" >Currently Reading</option>
 						<option value="wantToRead" >Want to Read</option>
