@@ -12,12 +12,12 @@ function Book( props ) {
 					<div className="book-cover" style={{ width: 128, height: 174, backgroundImage:  `url(${ imageLinks.smallThumbnail })` }}></div>
 				</Link>
 				<div className="book-shelf-changer">
-					<select onChange={ (event) => props.updateBooks({ id }, event.target.value) } >
-						<option value="none" disabled>Move to...</option>
-						<option value="currentlyReading" selected={ shelf === 'currentlyReading' } >Currently Reading</option>
-						<option value="wantToRead" selected={ shelf === 'wantToRead' } >Want to Read</option>
-						<option value="read" selected={ shelf === 'read' } >Read</option>
-						<option value="none" selected={ !shelf } >None</option>
+					<select onChange={ (event) => props.updateBooks({ id }, event.target.value) } defaultValue={ shelf ? shelf : 'none' } >
+						<option value="" disabled>Move to...</option>
+						<option value="currentlyReading" >Currently Reading</option>
+						<option value="wantToRead" >Want to Read</option>
+						<option value="read" >Read</option>
+						<option value="none" >None</option>
 					</select>
 				</div>
 			</div>
